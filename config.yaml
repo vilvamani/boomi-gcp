@@ -30,17 +30,17 @@ resources:
       region: asia-south1
 
 # GCP Firewall Rules
-- name: boomi-network-allow-http-ssh-rdp
+- name: boomi-network-allow-ssh-rdp-http-https
   type: firewall-template.jinja
   properties:
     network: $(ref.boomi-network.selfLink)
     IPProtocol: TCP
-    Port: [22, 80, 443]
+    Port: [22, 3389, 80, 443]
 
 - name: boomi-network-allow-icmp
   type: firewall-template.jinja
   properties:
-    network: $(ref.private-subnet-2.selfLink)
+    network: $(ref.boomi-network.selfLink)
     IPProtocol: ICMP
     Port: []
 

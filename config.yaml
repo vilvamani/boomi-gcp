@@ -28,14 +28,6 @@ resources:
       ipCidrRange: 10.130.48.0/20
       region: asia-south1
 
-# GCP Route
-- name: boomi-network-route
-  type: route-template.jinja
-  properties:
-    network: $(ref.boomi-network.selfLink)
-    use_custom_network: true
-    region: us-east4
-
 # GCP Firewall Rules
 - name: boomi-network-allow-http-ssh-rdp
   type: firewall-template.jinja

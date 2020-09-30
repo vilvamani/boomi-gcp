@@ -35,7 +35,7 @@ resources:
   properties:
     network: $(ref.boomi-network.selfLink)
     IPProtocol: TCP
-    Port: [22, 3389, 80, 443]
+    Port: [22, 80, 443]
 
 - name: boomi-network-allow-icmp
   type: firewall-template.jinja

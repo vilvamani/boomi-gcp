@@ -49,4 +49,4 @@ resources:
   properties:
     network: $(ref.boomi-network.selfLink)
     use_custom_network: true
-    region: us-central1
+    region: us-east1

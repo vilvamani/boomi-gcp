@@ -17,6 +17,15 @@ resources:
     - name: private-subnet-1
       ipCidrRange: 10.130.0.0/20
       region: us-central1
+    - name: private-subnet-2
+      ipCidrRange: 10.130.16.0/20
+      region: us-east4
+    - name: private-subnet-3
+      ipCidrRange: 10.130.32.0/20
+      region: europe-west2
+    - name: private-subnet-4
+      ipCidrRange: 10.130.48.0/20
+      region: asia-south1
 
 # GCP Firewall Rules
 - name: boomi-network-allow-http-ssh-rdp

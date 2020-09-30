@@ -30,7 +30,7 @@ resources:
       region: asia-south1
 
 # GCP Firewall Rules
-- name: boomi-network-allow-ssh-rdp-http-https
+- name: boomi-network-allow-http-ssh-rdp
   type: firewall-template.jinja
   properties:
     network: $(ref.boomi-network.selfLink)

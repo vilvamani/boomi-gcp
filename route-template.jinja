@@ -1,7 +1,8 @@
 resources:
 - name: {{ env["name"] }}
-  type: gcp-types/compute-v1:routes
+  type: compute.v1.router
   properties:
+    region: us-central1
     {% if properties and properties["use_custom_network"]==true %}
     network: properties["network"]
     {% else %}

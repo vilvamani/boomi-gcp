@@ -1,0 +1,35 @@
+resources:
+
+- name: {{ env["deployment"] }}-it
+  type: compute.v1.instanceTemplate
+  properties:
+    properties:
+      machineType: zones/{{ properties["zone"] }}/machineTypes/{{ properties["machineType"] }}
+      disks:
+      - deviceName: boot
+        boot: true
+        type: PERSISTENT
+        autoDelete: true
+        mode: READ_WRITE
+        initializeParams:
+          diskName: {{ env["deployment"] }}-disk
+          sourceImage: {{ properties["machineImage"] }}
+      networkInterfaces:
+        - network: {{ properties["network"] }}
+
+- name: {{ env["deployment"] }}-igm
+{% if "region" in properties %}
+  type: compute.v1.regionInstanceGroupManager
+{% else %}
+  type: compute.v1.instanceGroupManager
+{% endif %}
+  properties:
+{% if "region" in properties %}
+    region: {{ properties["region"] }}
+    failoverAction: NO_FAILOVER
+{% else %}
+    zone: {{ properties["zone"] }}
+{% endif %}
+    targetSize: {{ properties["targetSize"] }}
+    baseInstanceName: {{ env["deployment"] }}-instance
+    instanceTemplate: $(ref.{{ env["deployment"] }}-it.selfLink)

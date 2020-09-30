@@ -48,7 +48,7 @@ resources:
 - name: boomi-network-vm
   type: instance-template.jinja
   properties:
-    zone: us-central1
+    zone: us-central1-a
     machineType: n1-standard-1
     machineImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
     network: $(ref.boomi-network.selfLink)

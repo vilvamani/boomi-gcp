@@ -1,9 +1,7 @@
 imports:
-- path: autonetwork-template.jinja
 - path: customnetwork-template.jinja
 - path: subnetwork-template.jinja
 - path: firewall-template.jinja
-- path: instance-template.jinja
 
 resources:
 # GCP Custom Network

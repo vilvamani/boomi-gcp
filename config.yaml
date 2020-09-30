@@ -5,30 +5,28 @@ imports:
 
 resources:
 # GCP Custom Network
-- name: custom-network
+- name: network2
   type: customnetwork-template.jinja
 
 # GCP Subnets (us-central, canada, uk and mumbai)
-- name: subnetworks
+- name: network2-subnet-us
   type: subnetwork-template.jinja
   properties:
-    network: $(ref.custom-network.selfLink)
-    subnets:
-      - range: 20.0.0.0/20
-        region: us-west1
-        name: subnet-1
+    ipCidrRange: 10.130.0.0/20
+    network: $(ref.network2.selfLink)
+    region: us-central1
 
 # GCP Firewall Rules
-- name: custom-network-allow-http-ssh-rdp
+- name: network2-allow-http-ssh-rdp
   type: firewall-template.jinja
   properties:
-    network: $(ref.custom-network.selfLink)
+    network: $(ref.network2.selfLink)
     IPProtocol: TCP
-    Port: [22, 80, 443]
+    Port: [22, 80, 3389]
 
-- name: custom-network-allow-icmp
+- name: network2-allow-icmp
   type: firewall-template.jinja
   properties:
-    network: $(ref.custom-network.selfLink)
+    network: $(ref.network2.selfLink)
     IPProtocol: ICMP
     Port: []

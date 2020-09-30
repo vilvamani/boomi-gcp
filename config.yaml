@@ -42,3 +42,10 @@ resources:
     network: $(ref.boomi-network.selfLink)
     IPProtocol: ICMP
     Port: []
+
+# GCP Route
+- name: boomi-network-route
+  type: route-template.jinja
+  properties:
+    network: $(ref.boomi-network.selfLink)
+    use_custom_network: true

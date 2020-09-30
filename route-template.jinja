@@ -2,9 +2,11 @@ resources:
 - name: {{ env["name"] }}
   type: compute.v1.router
   properties:
-    region: properties["region"]
     {% if properties and properties["use_custom_network"]==true %}
-    network: {{ properties["network"] }}
+    network: properties["network"]
     {% else %}
     network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/default
     {% endif %}
+    priority: 1
+    destRange: 10.0.0.0/16
+    nextHopGateway: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/gateways/default-internet-gateway

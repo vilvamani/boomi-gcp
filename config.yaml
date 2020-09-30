@@ -34,7 +34,7 @@ resources:
   properties:
     network: $(ref.boomi-network.selfLink)
     use_custom_network: true
-    region: us-central1
+    region: us-east4
 
 # GCP Firewall Rules
 - name: boomi-network-allow-http-ssh-rdp

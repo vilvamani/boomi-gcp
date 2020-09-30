@@ -1,7 +1,8 @@
 resources:
-- name: {{ env["name"] }}
+- name: {{ env["name"] }}-route1
   type: compute.v1.router
   properties:
+    description: route with default internet gateway
     region: {{ properties["region"] }}
     {% if properties and properties["use_custom_network"]==true %}
     network: {{ properties["network"] }}
@@ -11,3 +12,18 @@ resources:
     priority: 1
     destRange: 10.0.0.0/16
     nextHopGateway: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/gateways/default-internet-gateway
+
+- name: {{ env["name"] }}-route2
+  type: compute.v1.router
+  properties:
+    description: route with next hop instance
+    region: {{ properties["region"] }}
+    {% if properties and properties["use_custom_network"]==true %}
+    network: {{ properties["network"] }}
+    {% else %}
+    network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/default
+    {% endif %}
+    priority: 2
+    destRange: 10.0.0.0/16
+    nextHopInstance: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/zones/{{ properties["zone"] }}/instances/instance-404
+    

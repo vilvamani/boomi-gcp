@@ -4,7 +4,7 @@ resources:
   type: compute.v1.instanceTemplate
   properties:
     properties:
-      machineType: {{ properties["machineType"] }}
+      machineType: zones/{{ properties["zone"] }}/machineTypes/{{ properties["machineType"] }}
       disks:
       - deviceName: boot
         boot: true
@@ -16,6 +16,10 @@ resources:
           sourceImage: {{ properties["machineImage"] }}
       networkInterfaces:
         - network: {{ properties["network"] }}
+          subnetwork: {{ properties["subnetwork"] }}
+          accessConfigs:
+          - name: External NAT
+            type: ONE_TO_ONE_NAT
 
 - name: {{ env["deployment"] }}-igm
 {% if "region" in properties %}

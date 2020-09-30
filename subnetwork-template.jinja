@@ -1,7 +1,12 @@
 resources:
-- name: {{ env["name"] }}
+{% for subnet in properties["subnets"] %}
+  {% set name = subnet["name"] %}
+  {% set range = subnet["range"] %}
+  {% set region = subnet["region"] %}
+- name: {{ name }}
   type: compute.v1.subnetwork
   properties:
-    ipCidrRange: {{ properties["ipCidrRange"]}}
-    network: {{ properties["network"]}}
-    region: {{ properties["region"]}}
+    network: {{ properties["network"] }}
+    ipCidrRange: {{ range }}
+    region: {{ region }}
+{% endfor %}

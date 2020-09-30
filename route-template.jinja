@@ -31,6 +31,7 @@ resources:
   type: compute.v1.router
   properties:
     description: route with next hop IP
+    region: {{ properties["region"] }}
     {% if properties and properties["use_custom_network"]==true %}
     network: {{ properties["network"] }}
     {% else %}
@@ -43,4 +44,3 @@ resources:
     {% else %}
     nextHopIp: 10.128.0.123
     {% endif %}
-    

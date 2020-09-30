@@ -40,7 +40,7 @@ resources:
 - name: boomi-network-allow-icmp
   type: firewall-template.jinja
   properties:
-    network: $(ref.boomi-network.selfLink)
+    network: $(ref.private-subnet-2.selfLink)
     IPProtocol: ICMP
     Port: []
 

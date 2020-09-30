@@ -2,6 +2,7 @@ imports:
 - path: customnetwork-template.jinja
 - path: subnetwork-template.jinja
 - path: firewall-template.jinja
+- path: route-template.jinja
 
 resources:
 # GCP Custom Network
@@ -26,6 +27,14 @@ resources:
     - name: private-subnet-4
       ipCidrRange: 10.130.48.0/20
       region: asia-south1
+
+# GCP Route
+- name: boomi-network-route
+  type: route-template.jinja
+  properties:
+    network: $(ref.boomi-network.selfLink)
+    use_custom_network: true
+    region: us-central1
 
 # GCP Firewall Rules
 - name: boomi-network-allow-http-ssh-rdp

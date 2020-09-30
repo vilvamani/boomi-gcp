@@ -3,6 +3,7 @@ imports:
 - path: subnetwork-template.jinja
 - path: firewall-template.jinja
 - path: route-template.jinja
+- path: instance-template.jinja
 
 resources:
 # GCP Custom Network
@@ -10,7 +11,7 @@ resources:
   type: customnetwork-template.jinja
 
 # GCP Subnets (us-central, canada, uk and mumbai)
-- name: boomi-network-subnet-us
+- name: boomi-network-subnet
   type: subnetwork-template.jinja
   properties:
     network: $(ref.boomi-network.selfLink)
@@ -29,12 +30,12 @@ resources:
       region: asia-south1
 
 # GCP Firewall Rules
-- name: boomi-network-allow-http-ssh-rdp
+- name: boomi-network-allow-ssh-rdp-http-https
   type: firewall-template.jinja
   properties:
     network: $(ref.boomi-network.selfLink)
     IPProtocol: TCP
-    Port: [22, 80, 443]
+    Port: [22, 3389, 80, 443]
 
 - name: boomi-network-allow-icmp
   type: firewall-template.jinja
@@ -43,10 +44,11 @@ resources:
     IPProtocol: ICMP
     Port: []
 
-# GCP Route
-- name: boomi-network-route
-  type: route-template.jinja
+# GCP Instance
+- name: boomi-network-vm
+  type: instance-template.jinja
   properties:
+    zone: us-central1-a
+    machineType: n1-standard-1
     network: $(ref.boomi-network.selfLink)
-    use_custom_network: true
-    region: us-east1
+    subnetwork: $(ref.boomi-network-subnet.selfLink)

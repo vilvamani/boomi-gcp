@@ -9,33 +9,14 @@ resources:
   type: customnetwork-template.jinja
 
 # GCP Subnets (us-central, canada, uk and mumbai)
-- name: custom-network-subnet-us
+- name: subnetworks
   type: subnetwork-template.jinja
   properties:
-    ipCidrRange: 10.130.0.0/20
     network: $(ref.custom-network.selfLink)
-    region: us-central1
-
-- name: custom-network-subnet-canada
-  type: subnetwork-template.jinja
-  properties:
-    ipCidrRange: 10.130.16.0/20
-    network: $(ref.custom-network.selfLink)
-    region: northamerica-northeast1
-
-- name: custom-network-subnet-uk
-  type: subnetwork-template.jinja
-  properties:
-    ipCidrRange: 10.130.32.0/20
-    network: $(ref.custom-network.selfLink)
-    region: europe-west2
-
-- name: custom-network-subnet-asia
-  type: subnetwork-template.jinja
-  properties:
-    ipCidrRange: 10.130.48.0/20
-    network: $(ref.custom-network.selfLink)
-    region: asia-southeast1
+    subnets:
+      - range: 20.0.0.0/20
+        region: us-west1
+        name: subnet-1
 
 # GCP Firewall Rules
 - name: custom-network-allow-http-ssh-rdp

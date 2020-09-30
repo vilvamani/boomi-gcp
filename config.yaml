@@ -51,4 +51,4 @@ resources:
     zone: us-central1-a
     machineType: n1-standard-1
     network: $(ref.boomi-network.selfLink)
-    subnetwork: $(ref.boomi-network-subnet.selfLink)
+    subnetwork: $(ref.private-subnet-1.selfLink)

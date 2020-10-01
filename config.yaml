@@ -77,7 +77,7 @@ resources:
       subnet: $(ref.private-subnet-1.selfLink)
     - region: us-east4
       subnet: $(ref.private-subnet-2.selfLink)
-    - region: us-west2
+    - region: europe-west2
       subnet: $(ref.private-subnet-3.selfLink)
 
 - name: boomi-cloud-nat
@@ -97,13 +97,15 @@ resources:
 #    subnetwork: $(ref.private-subnet-1.selfLink)
 
 # GCP Managed Instance Group
-#- name: boomi-bastion-instance
-#  type: instance_group_manager.jinja
-#  properties:
-#    region: us-central1
-#    zone: us-central1-a
-#    machineType: n1-standard-1
-#    network: $(ref.boomi-network.selfLink)
-#    subnetwork: $(ref.private-subnet-1.selfLink)
-#    machineImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
-#    targetSize: 1
+- name: boomi-bastion-instance
+  type: instance_group_manager.jinja
+  properties:
+    region: us-central1
+    zone: us-central1-a
+    machineType: n1-standard-1
+    network: $(ref.boomi-network.selfLink)
+    subnetwork: $(ref.private-subnet-1.selfLink)
+    machineImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
+    targetSize: 1
+    controller_disk_size_gb: 30
+#    external_controller_ip: no

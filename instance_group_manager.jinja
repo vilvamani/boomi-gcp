@@ -5,6 +5,12 @@ resources:
   properties:
     properties:
       machineType: zones/{{ properties["zone"] }}/machineTypes/{{ properties["machineType"] }}
+      networkInterfaces:
+        - network: {{ properties["network"] }}
+          subnetwork: {{ properties["subnetwork"] }}
+          accessConfigs:
+          - name: External NAT
+            type: ONE_TO_ONE_NAT
       disks:
       - deviceName: boot
         boot: true
@@ -14,12 +20,6 @@ resources:
         initializeParams:
           diskName: {{ env["name"] }}-disk
           sourceImage: {{ properties["machineImage"] }}
-      networkInterfaces:
-        - network: {{ properties["network"] }}
-          subnetwork: {{ properties["subnetwork"] }}
-          accessConfigs:
-          - name: External NAT
-            type: ONE_TO_ONE_NAT
       labels:
        fixedlabel: boomi-bastion-machine
 
@@ -37,5 +37,5 @@ resources:
     zone: {{ properties["zone"] }}
 {% endif %}
     targetSize: {{ properties["targetSize"] }}
-    baseInstanceName: {{ env["name"] }}-instance
+    baseInstanceName: {{ env["name"] }}-bastion-instance
     instanceTemplate: $(ref.{{ env["name"] }}-it.selfLink)

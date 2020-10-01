@@ -72,8 +72,20 @@ resources:
     use_custom_network: true
     network: $(ref.boomi-network.selfLink)
     region: us-central1
-    IPProtocol: ICMP
-    Port: []
+
+- name: boomi-cloud-router
+  type: route-template.jinja
+  properties:
+    use_custom_network: true
+    network: $(ref.boomi-network.selfLink)
+    region: us-east4
+
+- name: boomi-cloud-router
+  type: route-template.jinja
+  properties:
+    use_custom_network: true
+    network: $(ref.boomi-network.selfLink)
+    region: us-west2
 
 # GCP Instance
 #- name: boomi-network-vm

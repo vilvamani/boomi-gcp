@@ -1,5 +1,5 @@
 resources:
-- name: {{ env["name"] }}-route1
+- name: {{ env["name"] }}-{{ properties["region"] }}
   type: compute.v1.router
   properties:
     description: route with default internet gateway

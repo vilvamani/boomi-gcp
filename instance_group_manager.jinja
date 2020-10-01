@@ -4,7 +4,7 @@ resources:
   type: compute.v1.instanceTemplate
   properties:
     properties:
-      machineType: zones/{{ properties["zone"] }}/machineTypes/{{ properties["machineType"] }}
+      machineType: {{ properties["machineType"] }}
       networkInterfaces:
         - network: {{ properties["network"] }}
           subnetwork: {{ properties["subnetwork"] }}

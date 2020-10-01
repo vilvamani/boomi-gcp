@@ -31,7 +31,14 @@ resources:
       region: asia-south1
 
 # GCP Firewall Rules
-- name: boomi-network-allow-ssh-rdp-http-https
+- name: boomi-firewall-allow-bastion
+  type: firewall-template.jinja
+  properties:
+    network: $(ref.boomi-network.selfLink)
+    IPProtocol: TCP
+    Port: [22, 3389]
+
+- name: boomi-firewall-http-https
   type: firewall-template.jinja
   properties:
     network: $(ref.boomi-network.selfLink)

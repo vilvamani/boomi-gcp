@@ -1,3 +1,7 @@
+{% set REGION_1 = "us-central1" %}
+{% set REGION_2 = "us-east4" %}
+{% set REGION_3 = "europe-west2" %}
+
 imports:
 - path: customnetwork-template.jinja
 - path: subnetwork-template.jinja
@@ -19,7 +23,7 @@ resources:
     subnets:
     - name: public-subnet-1
       ipCidrRange: 10.130.0.0/20
-      region: us-central1
+      region: {{ REGION_1 }}
     - name: public-subnet-2
       ipCidrRange: 10.130.16.0/20
       region: us-east4

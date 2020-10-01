@@ -71,21 +71,10 @@ resources:
   properties:
     use_custom_network: true
     network: $(ref.boomi-network.selfLink)
-    region: us-central1
-
-- name: boomi-cloud-router2
-  type: route-template.jinja
-  properties:
-    use_custom_network: true
-    network: $(ref.boomi-network.selfLink)
-    region: us-east4
-
-- name: boomi-cloud-router3
-  type: route-template.jinja
-  properties:
-    use_custom_network: true
-    network: $(ref.boomi-network.selfLink)
-    region: us-west2
+    subnets: 
+    - region: us-central1
+    - region: us-east4
+    - region: us-west2
 
 # GCP Instance
 #- name: boomi-network-vm

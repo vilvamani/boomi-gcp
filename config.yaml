@@ -109,3 +109,4 @@ resources:
     targetSize: 1
     diskSizeGB: 30
     externalIP: True
+    tags: bastion-machine

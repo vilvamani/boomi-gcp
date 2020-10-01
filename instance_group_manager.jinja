@@ -22,9 +22,11 @@ resources:
         initializeParams:
           diskName: {{ env["name"] }}-disk
           sourceImage: {{ properties["machineImage"] }}
+{% for tags in properties["tags"] %}
       tags:
         items:
-          - bastion-machine
+          - properties["tags"]
+{% endfor %}
       labels:
        fixedlabel: boomi-bastion-machine
 

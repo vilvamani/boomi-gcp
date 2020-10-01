@@ -59,10 +59,19 @@ resources:
     IPProtocol: TCP
     Port: [80, 443]
 
-- name: boomi-network-allow-icmp
+- name: boomi-firewall-allow-icmp
   type: firewall-template.jinja
   properties:
     network: $(ref.boomi-network.selfLink)
+    IPProtocol: ICMP
+    Port: []
+
+- name: boomi-cloud-router
+  type: route-template.jinja
+  properties:
+    use_custom_network: true
+    network: $(ref.boomi-network.selfLink)
+    region: us-central1
     IPProtocol: ICMP
     Port: []
 

@@ -107,5 +107,5 @@ resources:
     subnetwork: $(ref.private-subnet-1.selfLink)
     machineImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
     targetSize: 1
-    controller_disk_size_gb: 30
-#    external_controller_ip: no
+    diskSizeGB: 30
+#    externalIP: False

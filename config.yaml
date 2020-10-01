@@ -77,12 +77,6 @@ resources:
     - region: us-east4
     - region: us-west2
 
-- name: boomi-cloud-nat
-  type: cloud-nat-template.jinja
-  properties:
-    network: $(ref.boomi-network.selfLink)
-    region: us-central1
-    
 # GCP Instance
 #- name: boomi-network-vm
 #  type: instance-template.jinja

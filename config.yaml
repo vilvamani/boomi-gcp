@@ -46,14 +46,14 @@ resources:
     Port: []
 
 # GCP Instance
-- name: boomi-network-vm
-  type: instance-template.jinja
-  properties:
-    zone: us-central1-a
-    machineType: n1-standard-1
-    machineImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
-    network: $(ref.boomi-network.selfLink)
-    subnetwork: $(ref.private-subnet-1.selfLink)
+#- name: boomi-network-vm
+#  type: instance-template.jinja
+#  properties:
+#    zone: us-central1-a
+#    machineType: n1-standard-1
+#    machineImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
+#    network: $(ref.boomi-network.selfLink)
+#    subnetwork: $(ref.private-subnet-1.selfLink)
 
 # GCP Managed Instance Group
 - name: instance_group_manager

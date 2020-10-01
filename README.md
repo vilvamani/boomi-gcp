@@ -6,6 +6,13 @@ You can list the active account name with this command:
 gcloud auth list
 ```
 
+To set your Cloud Platform project in this session use
+
+```
+gcloud config set project [PROJECT_ID]
+```
+
+
 You can list the project ID with this command:
 ```
 gcloud config list project

@@ -25,7 +25,7 @@ resources:
 {% if "tags" in properties %}
       tags:
         items:
-          - properties["tags"]
+          - {{ properties["tags"] }}
 {% endif %}
       labels:
        fixedlabel: boomi-bastion-machine

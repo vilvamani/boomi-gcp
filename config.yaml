@@ -26,10 +26,10 @@ resources:
       region: {{ REGION_1 }}
     - name: public-subnet-2
       ipCidrRange: 10.130.16.0/20
-      region: us-east4
+      region: {{ REGION_2 }}
     - name: public-subnet-3
       ipCidrRange: 10.130.32.0/20
-      region: europe-west2
+      region: {{ REGION_3 }}
 
 - name: boomi-private-subnet
   type: subnetwork-template.jinja

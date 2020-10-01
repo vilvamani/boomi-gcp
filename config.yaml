@@ -66,6 +66,7 @@ resources:
 - name: boomi-bastion-instance
   type: instance_group_manager.jinja
   properties:
+    region: us-central1
     zone: us-central1-a
     machineType: n1-standard-1
     network: $(ref.boomi-network.selfLink)

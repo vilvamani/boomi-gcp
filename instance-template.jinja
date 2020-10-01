@@ -12,6 +12,8 @@ resources:
         - name: External NAT
           type: ONE_TO_ONE_NAT
 {% endif %}
+        tags:
+        - bastion-machine
      disks:
       - deviceName: {{ env["name"] }}
         type: PERSISTENT

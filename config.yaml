@@ -66,21 +66,21 @@ resources:
     IPProtocol: ICMP
     Port: []
 
-- name: boomi-cloud-router
+- name: boomi-cloud-router1
   type: route-template.jinja
   properties:
     use_custom_network: true
     network: $(ref.boomi-network.selfLink)
     region: us-central1
 
-- name: boomi-cloud-router
+- name: boomi-cloud-router2
   type: route-template.jinja
   properties:
     use_custom_network: true
     network: $(ref.boomi-network.selfLink)
     region: us-east4
 
-- name: boomi-cloud-router
+- name: boomi-cloud-router3
   type: route-template.jinja
   properties:
     use_custom_network: true

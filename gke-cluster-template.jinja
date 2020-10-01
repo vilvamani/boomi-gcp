@@ -6,7 +6,7 @@ resources:
     cluster:
       name: {{ env['name'] }}
       initialNodeCount: {{ properties['initialNodeCount'] }}
-      initialClusterVersion: 1.15.12-gke.20
+      initialClusterVersion: 1.17.9-gke.6300
       currentMasterVersion: 1.17.9-gke.6300
       nodeConfig:
         oauthScopes:
@@ -14,6 +14,5 @@ resources:
         - https://www.googleapis.com/auth/devstorage.read_only
         - https://www.googleapis.com/auth/logging.write
         - https://www.googleapis.com/auth/monitoring
-      networkConfig:
-      - network: {{ properties["network"] }}
-        subnetwork: {{ properties["subnetwork"] }}
+      network: {{ properties["network"] }}
+      subnetwork: {{ properties["subnetwork"] }}

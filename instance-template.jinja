@@ -2,7 +2,7 @@ resources:
 - name: {{ env["name"] }}
   type: compute.v1.instance  
   properties:
-     machineType: zones/{{ properties["zone"] }}/machineTypes/{{ properties["machineType"] }}
+     machineType: {{ properties["machineType"] }}
      zone: {{ properties["zone"] }}
      networkInterfaces:
       - network: {{ properties["network"] }}

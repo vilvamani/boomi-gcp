@@ -12,7 +12,7 @@ resources:
         autoDelete: true
         mode: READ_WRITE
         initializeParams:
-          diskName: {{ env["deployment"] }}-disk
+          diskName: {{ env["name"] }}-disk
           sourceImage: {{ properties["machineImage"] }}
       networkInterfaces:
         - network: {{ properties["network"] }}
@@ -35,5 +35,5 @@ resources:
     zone: {{ properties["zone"] }}
 {% endif %}
     targetSize: {{ properties["targetSize"] }}
-    baseInstanceName: {{ env["deployment"] }}-instance
-    instanceTemplate: $(ref.{{ env["deployment"] }}-it.selfLink)
+    baseInstanceName: {{ env["name"] }}-instance
+    instanceTemplate: $(ref.{{ env["name"] }}-it.selfLink)

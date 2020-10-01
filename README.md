@@ -17,7 +17,7 @@ gcloud config set compute/zone us-central1-a
 ```
 
 ```
-git clone https://github.com/vilvamani/boomi-gcp.git
+git clone https://github.com/vilvamani/boomi-gcp.git && cd boomi-gcp
 ```
 
 ```

@@ -57,6 +57,7 @@ resources:
     network: $(ref.boomi-network.selfLink)
     IPProtocol: TCP
     Port: [80, 443]
+    targetTags: bastion-machine
 
 - name: boomi-network-allow-icmp
   type: firewall-template.jinja

@@ -20,6 +20,8 @@ resources:
           accessConfigs:
           - name: External NAT
             type: ONE_TO_ONE_NAT
+      labels:
+       fixedlabel: boomi-bastion-machine
 
 - name: {{ env["name"] }}-igm
 {% if "region" in properties %}

@@ -80,8 +80,8 @@ resources:
 - name: boomi-cloud-nat
   type: cloud-nat-template.jinja
   properties:
+    use_custom_network: true
     network: $(ref.boomi-network.selfLink)
-    region: us-central1
     
 # GCP Instance
 #- name: boomi-network-vm

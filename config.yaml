@@ -74,8 +74,11 @@ resources:
     network: $(ref.boomi-network.selfLink)
     subnets: 
     - region: us-central1
+      subnet: $(ref.private-subnet-1.selfLink)
     - region: us-east4
+      subnet: $(ref.private-subnet-2.selfLink)
     - region: us-west2
+      subnet: $(ref.private-subnet-3.selfLink)
 
 - name: boomi-cloud-nat
   type: cloud-nat-template.jinja

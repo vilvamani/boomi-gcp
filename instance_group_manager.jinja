@@ -13,8 +13,6 @@ resources:
           - name: External NAT
             type: ONE_TO_ONE_NAT
 {% endif %}
-          tags:
-          - bastion-machine
       disks:
       - deviceName: boot
         boot: true
@@ -24,6 +22,9 @@ resources:
         initializeParams:
           diskName: {{ env["name"] }}-disk
           sourceImage: {{ properties["machineImage"] }}
+      tags:
+        items:
+          - bastion-machine
       labels:
        fixedlabel: boomi-bastion-machine
 

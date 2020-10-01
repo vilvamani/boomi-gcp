@@ -50,6 +50,7 @@ resources:
     network: $(ref.boomi-network.selfLink)
     IPProtocol: TCP
     Port: [22, 3389]
+    targetTags: bastion-machine
 
 - name: boomi-firewall-http-https
   type: firewall-template.jinja
@@ -57,7 +58,6 @@ resources:
     network: $(ref.boomi-network.selfLink)
     IPProtocol: TCP
     Port: [80, 443]
-    targetTags: bastion-machine
 
 - name: boomi-network-allow-icmp
   type: firewall-template.jinja

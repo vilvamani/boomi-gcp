@@ -8,5 +8,6 @@ resources:
     - IPProtocol: {{ properties["IPProtocol"] }}
       ports: {{ properties["Port"] }}
 {% if "targetTags" in properties %}
-    targetTags: {{ properties["targetTags"] }}
+    targetTags: 
+    - {{ properties["targetTags"] }}
 {% endif %}

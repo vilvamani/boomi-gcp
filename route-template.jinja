@@ -13,7 +13,7 @@ resources:
     {% endif %}
     region: {{ region }}
     nats:
-    - name: {{ env["name"] ]}}-{{ region }}-nat
+    - name: {{ env["name"] }}-{{ region }}-nat
       natIpAllocateOption: "AUTO_ONLY"
       sourceSubnetworkIpRangesToNat: "10.130.48.0/20"
       subnetworks: 

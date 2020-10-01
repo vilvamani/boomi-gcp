@@ -6,6 +6,7 @@ imports:
 - path: instance-template.jinja
 - path: instance_group_manager.jinja
 - path: cloud-nat-template.jinja
+- path: gke-cluster-template.jinja
 
 resources:
 # GCP Custom Network
@@ -110,3 +111,10 @@ resources:
     diskSizeGB: 30
     externalIP: True
     tags: bastion-machine
+
+# GCP Kubernetes Engine
+- name: boomi-gke-cluster
+  type: gke-cluster-template.jinja
+  properties:
+    zone: us-central1-a
+    initialNodeCount: 1

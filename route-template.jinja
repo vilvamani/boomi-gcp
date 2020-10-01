@@ -16,7 +16,8 @@ resources:
     - name: {{ env["name"] ]}}-{{ region }}-nat
       natIpAllocateOption: "AUTO_ONLY"
       sourceSubnetworkIpRangesToNat: "LIST_OF_SUBNETWORKS"
-      subnetworks: {{ sub }}
+      subnetworks: 
+      - {{ sub }}
 
     priority: 1
     destRange: 10.0.0.0/16

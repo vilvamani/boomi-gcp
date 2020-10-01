@@ -12,23 +12,36 @@ resources:
   type: customnetwork-template.jinja
 
 # GCP Subnets (us-central, canada, uk and mumbai)
-- name: boomi-network-subnet
+- name: boomi-public-subnet
+  type: subnetwork-template.jinja
+  properties:
+    network: $(ref.boomi-network.selfLink)
+    subnets:
+    - name: public-subnet-1
+      ipCidrRange: 10.130.0.0/20
+      region: us-central1
+    - name: public-subnet-2
+      ipCidrRange: 10.130.16.0/20
+      region: us-east4
+    - name: public-subnet-3
+      ipCidrRange: 10.130.32.0/20
+      region: europe-west2
+
+- name: boomi-private-subnet
   type: subnetwork-template.jinja
   properties:
     network: $(ref.boomi-network.selfLink)
     subnets:
     - name: private-subnet-1
-      ipCidrRange: 10.130.0.0/20
+      ipCidrRange: 10.130.48.0/20
       region: us-central1
     - name: private-subnet-2
-      ipCidrRange: 10.130.16.0/20
+      ipCidrRange: 10.130.64.0/20
       region: us-east4
     - name: private-subnet-3
-      ipCidrRange: 10.130.32.0/20
+      ipCidrRange: 10.130.80.0/20
       region: europe-west2
-    - name: private-subnet-4
-      ipCidrRange: 10.130.48.0/20
-      region: asia-south1
+
 
 # GCP Firewall Rules
 - name: boomi-firewall-allow-bastion
@@ -63,13 +76,13 @@ resources:
 #    subnetwork: $(ref.private-subnet-1.selfLink)
 
 # GCP Managed Instance Group
-- name: boomi-bastion-instance
-  type: instance_group_manager.jinja
-  properties:
-    region: us-central1
-    zone: us-central1-a
-    machineType: n1-standard-1
-    network: $(ref.boomi-network.selfLink)
-    subnetwork: $(ref.private-subnet-1.selfLink)
-    machineImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
-    targetSize: 1
+#- name: boomi-bastion-instance
+#  type: instance_group_manager.jinja
+#  properties:
+#    region: us-central1
+#    zone: us-central1-a
+#    machineType: n1-standard-1
+#    network: $(ref.boomi-network.selfLink)
+#    subnetwork: $(ref.private-subnet-1.selfLink)
+#    machineImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
+#    targetSize: 1

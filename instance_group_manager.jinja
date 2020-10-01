@@ -1,6 +1,6 @@
 resources:
 
-- name: {{ env["deployment"] }}-it
+- name: {{ env["name"] }}-it
   type: compute.v1.instanceTemplate
   properties:
     properties:
@@ -21,7 +21,7 @@ resources:
           - name: External NAT
             type: ONE_TO_ONE_NAT
 
-- name: {{ env["deployment"] }}-igm
+- name: {{ env["name"] }}-igm
 {% if "region" in properties %}
   type: compute.v1.regionInstanceGroupManager
 {% else %}

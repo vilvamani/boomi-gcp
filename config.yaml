@@ -56,7 +56,7 @@ resources:
 #    subnetwork: $(ref.private-subnet-1.selfLink)
 
 # GCP Managed Instance Group
-- name: instance_group_manager
+- name: boomi-bastion-instance
   type: instance_group_manager.jinja
   properties:
     zone: us-central1-a

@@ -7,11 +7,9 @@ resources:
      networkInterfaces:
       - network: {{ properties["network"] }}
         subnetwork: {{ properties["subnetwork"] }}
-{% if properties['externalIP'] %}
         accessConfigs:
         - name: External NAT
           type: ONE_TO_ONE_NAT
-{% endif %}
         tags:
         - bastion-machine
      disks:

@@ -164,9 +164,3 @@ resources:
     # We can only create 1 node pool at a time.
     - {{ CPU_POOL }}
 
-{# Project defaults to the project of the deployment. #}
-- name: {{ properties['ipName']  }}
-  type: compute.v1.globalAddress
-  properties:
-    description: "Static IP for Kubeflow ingress."
-    - {{ CLUSTER_NAME }}

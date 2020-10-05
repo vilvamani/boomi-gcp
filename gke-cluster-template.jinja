@@ -1,11 +1,42 @@
+{% set NAME_PREFIX = boomi-gke-cluster %}
+{% set CLUSTER_NAME = NAME_PREFIX %}
+{% set CPU_POOL = NAME_PREFIX + '-cpu-pool-' + properties['pool-version'] %}
+{% set GPU_POOL = NAME_PREFIX + '-gpu-pool-' + properties['pool-version'] %}
+
 {% set VM_OAUTH_SCOPES = ['https://www.googleapis.com/auth/compute', 'https://www.googleapis.com/auth/devstorage.read_only', 'https://www.googleapis.com/auth/logging.write', 'https://www.googleapis.com/auth/monitoring'] %}
 
 {# A dictionary mapping type name suffixes to the corresponding Kubernetes API endpoint.#}
 {% set K8S_ENDPOINTS = {'': 'api/v1', '-v1beta1-extensions': 'apis/extensions/v1beta1', '-rbac-v1': 'apis/rbac.authorization.k8s.io/v1', '-apps-v1': 'apis/apps/v1/'}  %}
 
+{# Names for service accounts.
+   -admin is to be used for admin tasks
+   -user is to be used by users for actual jobs.
+   -vm is used for the VM service account attached to the GKE VMs.
+ #}
+{% set KF_ADMIN_NAME = NAME_PREFIX + '-admin' %}
+{% set KF_USER_NAME = NAME_PREFIX + '-user' %}
+{% set KF_VM_SA_NAME = NAME_PREFIX + '-vm' %}
 
 resources:
-- name: {{ env['name'] }}
+- name: {{ KF_ADMIN_NAME }}
+  type: iam.v1.serviceAccount
+  properties:
+    accountId: {{ KF_ADMIN_NAME }}
+    displayName: Service Account used for Kubeflow admin actions.
+
+- name: {{ KF_USER_NAME }}
+  type: iam.v1.serviceAccount
+  properties:
+    accountId: {{ KF_USER_NAME }}
+    displayName: Service Account used for Kubeflow user actions.
+
+- name: {{ KF_VM_SA_NAME }}
+  type: iam.v1.serviceAccount
+  properties:
+    accountId: {{ properties['vmServiceAccountName'] }}
+    displayName: GCP Service Account to use as VM Service Account for Kubeflow Cluster VMs
+
+- name: {{ CLUSTER_NAME }}
   {% if properties['gkeApiVersion'] == 'v1beta1' %}
   type: gcp-types/container-v1beta1:projects.locations.clusters
   {% else %}
@@ -15,7 +46,9 @@ resources:
     parent: projects/{{ env['project'] }}/locations/{{ properties['zone'] }}
     zone: {{ properties['zone'] }}
     cluster:
-      name: {{ env['name'] }}
+      name: {{ CLUSTER_NAME }}
+      # Create a very small minimal pool. Actual nodes will be managed
+      # as additional node pools. This makes it easier to
       initialNodeCount: {{ properties['initialNodeCount'] }}
       initialClusterVersion: 1.17.9-gke.6300
       currentMasterVersion: 1.17.9-gke.6300
@@ -38,12 +71,16 @@ resources:
       privateCluster: true
       masterAuthorizedNetworksConfig: {{ properties['securityConfig']['masterAuthorizedNetworksConfig'] }}
       {% endif %}
+      network: {{ properties["network"] }}
+      subnetwork: {{ properties["subnetwork"] }}
       nodeConfig:
         machineType: n1-standard-1
+        serviceAccount: {{ KF_VM_SA_NAME }}@{{ env['project'] }}.iam.gserviceaccount.com
         {% if properties['securityConfig']['secureNodeMetadata'] %}
         workloadMetadataConfig:
           nodeMetadata: SECURE
         {% endif %}
         oauthScopes: {{ VM_OAUTH_SCOPES }}
-      network: {{ properties["network"] }}
-      subnetwork: {{ properties["subnetwork"] }}
+  metadata:
+    dependsOn:
+    - {{ KF_VM_SA_NAME }}

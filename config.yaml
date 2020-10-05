@@ -116,9 +116,15 @@ resources:
 - name: boomi-gke-cluster
   type: gke-cluster-template.jinja
   properties:
+    zone: us-central1-a
      # Set this to v1beta1 to use beta features such as private clusters
     gkeApiVersion: v1beta1
-    zone: us-central1-a
+    # Two is small enough to fit within default quota.
+    cpu-pool-initialNodeCount: 2
+    gpu-pool-initialNodeCount: 0
+    # Whether to deploy the new Stackdriver Kubernetes agents
+    stackdriver-kubernetes: false
+    
     initialNodeCount: 1
     network: $(ref.boomi-network.selfLink)
     subnetwork: $(ref.private-subnet-1.selfLink)

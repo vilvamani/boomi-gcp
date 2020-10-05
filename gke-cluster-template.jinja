@@ -8,6 +8,9 @@ resources:
       initialNodeCount: {{ properties['initialNodeCount'] }}
       initialClusterVersion: 1.17.9-gke.6300
       currentMasterVersion: 1.17.9-gke.6300
+      privateClusterConfig:
+        enablePrivateNodes: true
+        enablePrivateEndpoint: true
       nodeConfig:
         oauthScopes:
         - https://www.googleapis.com/auth/compute

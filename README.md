@@ -23,6 +23,12 @@ Start a new session in Cloud Shell and run the following command to set your def
 gcloud config set compute/zone us-central1-a
 ```
 
+Enable the Compute Engine and Deployment Manager APIs, which you will need for this tutorial.
+
+```
+gcloud services enable compute.googleapis.com deploymentmanager.googleapis.com  
+```
+
 ```
 git clone https://github.com/vilvamani/boomi-gcp.git && cd boomi-gcp
 ```

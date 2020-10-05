@@ -1,0 +1,16 @@
+imports:
+- path: boomi-master.jinja
+
+resources:
+# Boomi GKE Quickstart Deployment Manager Templates
+- name: boomi-network
+  type: customnetwork-template.jinja
+  properties:
+    region: us-central1
+    publicSubnetCidrRange: 10.130.0.0/20
+    privateSubnetCidrRange: 10.130.16.0/20
+    # Set this to v1beta1 to use beta features such as private clusters
+    gkeApiVersion: v1beta1
+    # Two is small enough to fit within default quota.
+    cpu-pool-initialNodeCount: 2
+    gpu-pool-initialNodeCount: 0

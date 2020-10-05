@@ -1,0 +1,11 @@
+# Import templates
+{% extends "customnetwork-template.jinja" %} 
+
+
+{% set NAME_PREFIX = env['deployment'] %}
+{% SET REGION = properties["region"] %}
+
+resources:
+# GCP Custom Network
+- name: {{ NAME_PREFIX + '-network' }}
+  type: customnetwork-template.jinja

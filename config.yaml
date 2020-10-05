@@ -119,4 +119,4 @@ resources:
     zone: us-central1-a
     initialNodeCount: 1
     network: $(ref.boomi-network.selfLink)
-    subnetwork: $(ref.public-subnet-1.selfLink)
+    subnetwork: $(ref.private-subnet-1.selfLink)

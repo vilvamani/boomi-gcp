@@ -1,5 +1,5 @@
 resources:
-- name: {{ env["name"] }}-vm
+- name: {{ env["name"] }}-it
   type: compute.v1.instanceTemplate
   properties:
     properties:
@@ -44,4 +44,4 @@ resources:
     {% endif %}
     targetSize: {{ properties["targetSize"] }}
     baseInstanceName: {{ env["name"] }}-bastion-instance
-    instanceTemplate: $(ref.{{ env["name"] }}-vm.selfLink)
+    instanceTemplate: $(ref.{{ env["name"] }}-it.selfLink)

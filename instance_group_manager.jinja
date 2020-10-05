@@ -45,4 +45,4 @@ resources:
     {% endif %}
     targetSize: {{ properties["targetSize"] }}
     baseInstanceName: {{ env["name"] }}-bastion-instance
-    instanceTemplate: $(ref.{{ env["name"] }}-it.selfLink)
+    instanceTemplate: $(ref.{{ env["name"] }}-vm.selfLink)

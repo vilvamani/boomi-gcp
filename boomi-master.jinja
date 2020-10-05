@@ -2,10 +2,15 @@
 {% import "customnetwork-template.jinja" as customnetwork with context %}
 {% import "subnetwork-template.jinja" as subnetwork with context  %}
 {% import "firewall-template.jinja" as firewall with context  %}
+{% import "route-template.jinja" as route with context  %}
+{% import "cloud-nat-template.jinja" as cloudnat with context  %}
 
 {% set NAME_PREFIX = env["deployment"] %}
 {% set REGION = properties["region"] %}
 {% set VPC_NAME = NAME_PREFIX + '-network' %}
+{% set PUBLIC_SUBNET =  'public-subnet-' + REGION %}
+{% set PRIVATE_SUBNET = 'private-subnet-' + REGION  %}
+
 
 resources:
 # GCP Custom Network
@@ -18,10 +23,10 @@ resources:
   properties:
     network: $(ref.{{ VPC_NAME }}.selfLink)
     subnets:
-    - name: public-subnet-{{ REGION }}
+    - name: {{ PUBLIC_SUBNET }}
       ipCidrRange: 10.130.0.0/20
       region: {{ REGION }}
-    - name: private-{{ REGION }}
+    - name: {{ PRIVATE_SUBNET }}
       ipCidrRange: 10.130.16.0/20
       region: {{ REGION }}
 
@@ -47,3 +52,18 @@ resources:
     network: $(ref.{{ VPC_NAME }}.selfLink)
     IPProtocol: ICMP
     Port: []
+
+- name: {{ NAME_PREFIX + '-cloud-router' }}
+  type: route-template.jinja
+  properties:
+    use_custom_network: true
+    network: $(ref.{{ VPC_NAME }}.selfLink)
+    subnets: 
+    - region: {{ REGION }}
+      subnet: $(ref.{{ PRIVATE_SUBNET }}.selfLink)
+
+- name: {{ NAME_PREFIX + '-cloud-nat' }}
+  type: cloud-nat-template.jinja
+  properties:
+    use_custom_network: true
+    network: $(ref.{{ VPC_NAME }}.selfLink)

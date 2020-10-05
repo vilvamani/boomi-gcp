@@ -125,7 +125,7 @@ resources:
     # Use prefix v so it will be treated as a string.
     pool-version: v1
     # Two is small enough to fit within default quota.
-    cpu-pool-initialNodeCount: 2
+    cpu-pool-initialNodeCount: 0
     gpu-pool-initialNodeCount: 0
     # Whether to deploy the new Stackdriver Kubernetes agents
     stackdriver-kubernetes: false

@@ -28,7 +28,7 @@ git clone https://github.com/vilvamani/boomi-gcp.git && cd boomi-gcp
 ```
 
 ```
-gcloud deployment-manager deployments create gcpnetwork --config=config.yaml
+gcloud deployment-manager deployments create boomi-quickstart --config=config.yaml
 ```
 where gcpnetwork is the name of the deployment.
 

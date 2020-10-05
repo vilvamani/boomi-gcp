@@ -32,8 +32,8 @@ resources:
 
       {% if properties['securityConfig']['privatecluster'] %}
       ipAllocationPolicy:
-        createSubnetwork: true
-        useIpAliases: true
+        createSubnetwork: false
+        useIpAliases: false
       masterIpv4CidrBlock: {{ properties['securityConfig']['masterIpv4CidrBlock'] }}
       privateCluster: true
       masterAuthorizedNetworksConfig: {{ properties['securityConfig']['masterAuthorizedNetworksConfig'] }}

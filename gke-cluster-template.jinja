@@ -13,11 +13,14 @@ resources:
       # See cloud.google.com/monitoring/kubernetes-engine/.
       loggingService: logging.googleapis.com/kubernetes
       monitoringService: monitoring.googleapis.com/kubernetes
+      {% if properties['securityConfig']['privatecluster'] %}
       ipAllocationPolicy:
         createSubnetwork: true
         useIpAliases: true
       masterIpv4CidrBlock: {{ properties['securityConfig']['masterIpv4CidrBlock'] }}
       privateCluster: true
+      masterAuthorizedNetworksConfig: {{ properties['securityConfig']['masterAuthorizedNetworksConfig'] }}
+      {% endif %}
       nodeConfig:
         oauthScopes:
         - https://www.googleapis.com/auth/compute

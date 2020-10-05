@@ -130,7 +130,7 @@ resources:
     # Whether to deploy the new Stackdriver Kubernetes agents
     stackdriver-kubernetes: false
     
-    initialNodeCount: 0
+    initialNodeCount: 1
     network: $(ref.boomi-network.selfLink)
     subnetwork: $(ref.private-subnet-1.selfLink)
     securityConfig:

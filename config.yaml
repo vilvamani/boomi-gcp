@@ -120,3 +120,7 @@ resources:
     initialNodeCount: 1
     network: $(ref.boomi-network.selfLink)
     subnetwork: $(ref.private-subnet-1.selfLink)
+    privatecluster: false
+    # masterIpv4CidrBlock for private clusters, if enabled
+    # Use v1beta1 api
+    masterIpv4CidrBlock: 172.16.0.16/28

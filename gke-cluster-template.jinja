@@ -6,6 +6,7 @@ resources:
   type: container.v1.cluster
   {% endif %}
   properties:
+    parent: projects/{{ env['project'] }}/locations/{{ properties['zone'] }}
     zone: {{ properties['zone'] }}
     cluster:
       name: {{ env['name'] }}

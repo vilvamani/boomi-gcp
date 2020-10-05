@@ -126,10 +126,10 @@ resources:
       privatecluster: true
       # masterIpv4CidrBlock for private clusters, if enabled
       # Use v1beta1 api
-      masterIpv4CidrBlock: 172.16.0.16/28
+      #masterIpv4CidrBlock: 172.16.0.16/28
       # Protect worker node metadata from pods
       # Use v1beta1 api
-      secureNodeMetadata: false
+      #secureNodeMetadata: false
       # Whether to enable Pod Security Policy Admission Controller
       # Use v1beta1 api
       podSecurityPolicy: false

@@ -116,6 +116,8 @@ resources:
 - name: boomi-gke-cluster
   type: gke-cluster-template.jinja
   properties:
+     # Set this to v1beta1 to use beta features such as private clusters
+    gkeApiVersion: v1beta1
     zone: us-central1-a
     initialNodeCount: 1
     network: $(ref.boomi-network.selfLink)

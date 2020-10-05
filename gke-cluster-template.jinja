@@ -1,6 +1,10 @@
 resources:
 - name: {{ env['name'] }}
+  {% if properties['gkeApiVersion'] == 'v1beta1' %}
+  type: gcp-types/container-v1beta1:projects.locations.clusters
+  {% else %}
   type: container.v1.cluster
+  {% endif %}
   properties:
     zone: {{ properties['zone'] }}
     cluster:

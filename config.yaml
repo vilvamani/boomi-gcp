@@ -6,7 +6,7 @@ imports:
 - path: instance-template.jinja
 - path: instance_group_manager.jinja
 - path: cloud-nat-template.jinja
-- path: gke-cluster-template.jinja
+- path: gke-cluster-template1.jinja
 
 resources:
 # GCP Custom Network
@@ -114,7 +114,7 @@ resources:
 
 # GCP Kubernetes Engine
 - name: boomi-gke-cluster
-  type: gke-cluster-template.jinja
+  type: gke-cluster-template1.jinja
   properties:
     zone: us-central1-a
      # Set this to v1beta1 to use beta features such as private clusters

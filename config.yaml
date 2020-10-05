@@ -120,7 +120,7 @@ resources:
     initialNodeCount: 1
     network: $(ref.boomi-network.selfLink)
     subnetwork: $(ref.private-subnet-1.selfLink)
-    securityConfig
+    securityConfig:
       # Whether to use a cluster with private IPs
       # Use v1beta1 api
       privatecluster: true

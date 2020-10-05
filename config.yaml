@@ -119,6 +119,11 @@ resources:
     zone: us-central1-a
      # Set this to v1beta1 to use beta features such as private clusters
     gkeApiVersion: v1beta1
+    # An arbitrary string appending to name of nodepools
+    # bump this if you want to modify the node pools.
+    # This will cause existing node pools to be deleted and new ones to be created.
+    # Use prefix v so it will be treated as a string.
+    pool-version: v1
     # Two is small enough to fit within default quota.
     cpu-pool-initialNodeCount: 2
     gpu-pool-initialNodeCount: 0

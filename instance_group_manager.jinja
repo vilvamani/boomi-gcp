@@ -8,11 +8,11 @@ resources:
       networkInterfaces:
         - network: {{ properties["network"] }}
           subnetwork: {{ properties["subnetwork"] }}
-{% if properties['externalIP'] %}
+          {% if properties['externalIP'] %}
           accessConfigs:
           - name: External NAT
             type: ONE_TO_ONE_NAT
-{% endif %}
+          {% endif %}
       disks:
       - deviceName: boot
         boot: true
@@ -22,27 +22,27 @@ resources:
         initializeParams:
           diskName: {{ env["name"] }}-disk
           sourceImage: {{ properties["machineImage"] }}
-{% if "tags" in properties %}
+      {% if "tags" in properties %}
       tags:
         items:
           - {{ properties["tags"] }}
-{% endif %}
+      {% endif %}
       labels:
        fixedlabel: boomi-bastion-machine
 
 - name: {{ env["name"] }}-igm
-{% if "region" in properties %}
+  {% if "region" in properties %}
   type: compute.v1.regionInstanceGroupManager
-{% else %}
+  {% else %}
   type: compute.v1.instanceGroupManager
-{% endif %}
+  {% endif %}
   properties:
-{% if "region" in properties %}
+    {% if "region" in properties %}
     region: {{ properties["region"] }}
     failoverAction: NO_FAILOVER
-{% else %}
+    {% else %}
     zone: {{ properties["zone"] }}
-{% endif %}
+    {% endif %}
     targetSize: {{ properties["targetSize"] }}
     baseInstanceName: {{ env["name"] }}-bastion-instance
     instanceTemplate: $(ref.{{ env["name"] }}-it.selfLink)

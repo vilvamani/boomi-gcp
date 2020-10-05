@@ -7,7 +7,7 @@ resources:
     allowed:
     - IPProtocol: {{ properties["IPProtocol"] }}
       ports: {{ properties["Port"] }}
-{% if "targetTags" in properties %}
+    {% if "targetTags" in properties %}
     targetTags: 
     - {{ properties["targetTags"] }}
-{% endif %}
+    {% endif %}

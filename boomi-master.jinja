@@ -73,6 +73,7 @@ resources:
 - name: {{ NAME_PREFIX + '-gke-cluster' }}
   type: gke-cluster-template1.jinja
   properties:
+    region: us-central1
     zone: us-central1-a
      # Set this to v1beta1 to use beta features such as private clusters
     gkeApiVersion: {{ properties["gkeApiVersion"] }}

@@ -61,8 +61,8 @@ resources:
   type: container.v1.cluster
   {% endif %}
   properties:
-    parent: projects/{{ env['project'] }}/locations/{{ properties['zone'] }}
-    zone: {{ properties['zone'] }}
+    parent: projects/{{ env['project'] }}/locations/{{ properties['region'] }}
+    # zone: {{ properties['zone'] }}
     cluster:
       name: {{ CLUSTER_NAME }}
       # Create a very small minimal pool. Actual nodes will be managed

@@ -3,8 +3,6 @@ imports:
 - path: subnetwork-template.jinja
 - path: firewall-template.jinja
 - path: route-template.jinja
-- path: instance-template.jinja
-- path: instance_group_manager.jinja
 - path: cloud-nat-template.jinja
 - path: gke-cluster-template1.jinja
 - path: boomi-master.jinja

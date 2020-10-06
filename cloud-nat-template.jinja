@@ -1,5 +1,5 @@
 resources:
-- name: boomi-route
+- name: {{ env["name"] }}
   type: compute.v1.route
   properties:
     description: route with default internet gateway

@@ -1,17 +1,8 @@
-# Import templates
-{% import "customnetwork-template.jinja" as customnetwork with context %}
-{% import "subnetwork-template.jinja" as subnetwork with context  %}
-{% import "firewall-template.jinja" as firewall with context  %}
-{% import "route-template.jinja" as route with context  %}
-{% import "cloud-nat-template.jinja" as cloudnat with context  %}
-{% import "gke-cluster-template1.jinja" as gkecluster with context  %}
-
 {% set NAME_PREFIX = env["deployment"] %}
 {% set REGION = properties["region"] %}
 {% set VPC_NAME = NAME_PREFIX + '-network' %}
-{% set PUBLIC_SUBNET =  'public-subnet-' + REGION %}
-{% set PRIVATE_SUBNET = 'private-subnet-' + REGION  %}
-
+{% set PUBLIC_SUBNET =  NAME_PREFIX + '-public-subnet-' + REGION %}
+{% set PRIVATE_SUBNET = NAME_PREFIX + '-private-subnet-' + REGION  %}
 
 resources:
 # GCP Custom Network

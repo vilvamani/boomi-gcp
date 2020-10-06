@@ -3,7 +3,7 @@ resources:
   type: compute.v1.instanceTemplate
   properties:
     properties:
-      machineType: {{ properties["bastionMachineType"] }}
+      machineType: {{ properties["machineType"] }}
       networkInterfaces:
         - network: {{ properties["network"] }}
           subnetwork: {{ properties["subnetwork"] }}

@@ -1,24 +1,22 @@
 imports:
-  - path: customnetwork-template.jinja
-  - path: subnetwork-template.jinja
-  - path: firewall-template.jinja
-  - path: route-template.jinja
-  - path: instance-template.jinja
-  - path: instance_group_manager.jinja
-  - path: cloud-nat-template.jinja
-  - path: gke-cluster-template1.jinja
-  - path: boomi-master.jinja
+- path: customnetwork-template.jinja
+- path: subnetwork-template.jinja
+- path: firewall-template.jinja
+- path: route-template.jinja
+- path: instance-template.jinja
+- path: instance_group_manager.jinja
+- path: cloud-nat-template.jinja
+- path: gke-cluster-template1.jinja
+- path: boomi-master.jinja
   
-  resources:
-  # GCP Custom Network
-  - name: boomi-network
-    type: boomi-master.jinja
-    properties:
-      region: us-central1
-      publicSubnetCidrRange: 10.130.0.0/20
-      privateSubnetCidrRange: 10.130.16.0/20
-      gkeApiVersion: v1beta1
-      initialNodeCount: 2
-      privatecluster: true
-      
-  
+resources:
+# GCP Custom Network
+- name: boomi-network
+  type: boomi-master.jinja
+  properties:
+    region: us-central1
+    publicSubnetCidrRange: 10.130.0.0/20
+    privateSubnetCidrRange: 10.130.16.0/20
+    gkeApiVersion: v1beta1
+    initialNodeCount: 2
+    privatecluster: true

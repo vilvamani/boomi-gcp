@@ -80,8 +80,6 @@ resources:
           disabled: false
         horizontalPodAutoscaling:
           disabled: false
-        kubernetesDashboard:
-          disabled: false
         gcePersistentDiskCsiDriverConfig:
           enabled: true
         
@@ -95,7 +93,7 @@ resources:
         createSubnetwork: false
         useIpAliases: true
       masterIpv4CidrBlock: {{ properties['securityConfig']['masterIpv4CidrBlock'] }}
-      privateCluster: {{ properties["privatecluster"] }}
+      privateCluster: {{ properties['securityConfig']['privatecluster'] }}
       masterAuthorizedNetworksConfig: {{ properties['securityConfig']['masterAuthorizedNetworksConfig'] }}
       {% endif %}
 

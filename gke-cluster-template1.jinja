@@ -10,7 +10,7 @@
 {% set TYPE_NAME = NAME_PREFIX + '-type' %}
 {% set RBAC_TYPE_NAME = TYPE_NAME + '-rbac-v1' %}
 {% set APPS_TYPE_NAME = TYPE_NAME + '-apps-v1' %}
-{% set VM_OAUTH_SCOPES = ['https://www.googleapis.com/auth/compute', 'https://www.googleapis.com/auth/devstorage.read_only', 'https://www.googleapis.com/auth/logging.write', 'https://www.googleapis.com/auth/monitoring'] %}
+{% set VM_OAUTH_SCOPES = ['https://www.googleapis.com/auth/compute', 'https://www.googleapis.com/auth/devstorage.read_only', 'https://www.googleapis.com/auth/logging.write', 'https://www.googleapis.com/auth/monitoring', 'https://www.googleapis.com/auth/cloud_debugger'] %}
 
 {# A dictionary mapping type name suffixes to the corresponding
    Kubernetes API endpoint.
@@ -76,6 +76,14 @@ resources:
       loggingService: logging.googleapis.com/kubernetes
       monitoringService: monitoring.googleapis.com/kubernetes
 
+      addonsConfig:
+        httpLoadBalancing:
+          disabled: false
+        horizontalPodAutoscaling:
+          disabled: false
+        kubernetesDashboard:
+          disabled: true
+
       {% if properties['gkeApiVersion'] == 'v1beta1' %}
       podSecurityPolicyConfig:
         enabled: {{ properties['securityConfig']['podSecurityPolicy'] }}
@@ -121,12 +129,20 @@ resources:
     nodePool:
       name: cpu-pool
       initialNodeCount: {{ properties['cpu-pool-initialNodeCount'] }}
+      autoscaling:
+        enabled: true
+        minNodeCount: 1
+        maxNodeCount: 3
+      management:
+        autoUpgrade: true
+        autoRepair: true
       config:
         {% if properties['securityConfig']['secureNodeMetadata'] %}
         workloadMetadataConfig:
           nodeMetadata: SECURE
         {% endif %}
         machineType: n1-standard-8
+        diskSizeGb: 20
         serviceAccount: {{ KF_VM_SA_NAME }}@{{ env['project'] }}.iam.gserviceaccount.com
         oauthScopes: {{ VM_OAUTH_SCOPES }}
   metadata:

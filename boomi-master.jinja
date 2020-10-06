@@ -103,7 +103,7 @@ resources:
     network: $(ref.{{ VPC_NAME }}.selfLink)
     subnetwork: $(ref.{{ PUBLIC_SUBNET }}.selfLink)
     machineType: {{ properties["bastionMachineType"] }}
-    machineImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/centos-7
+    machineImage: https://www.googleapis.com/compute/v1/projects/centos-cloud/global/images/family/centos-7
     targetSize: 1
     diskSizeGB: 30
     externalIP: True

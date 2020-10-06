@@ -43,5 +43,5 @@ resources:
     zone: {{ properties["zone"] }}
     {% endif %}
     targetSize: {{ properties["targetSize"] }}
-    baseInstanceName: {{ env["name"] }}-bastion-instance
+    baseInstanceName: {{ env["name"] }}
     instanceTemplate: $(ref.{{ env["name"] }}-it.selfLink)

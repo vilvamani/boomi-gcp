@@ -95,7 +95,7 @@ resources:
         createSubnetwork: false
         useIpAliases: true
       masterIpv4CidrBlock: {{ properties['securityConfig']['masterIpv4CidrBlock'] }}
-      privateCluster: true
+      privateCluster: {{ properties["privatecluster"] }}
       masterAuthorizedNetworksConfig: {{ properties['securityConfig']['masterAuthorizedNetworksConfig'] }}
       {% endif %}
 
@@ -104,9 +104,9 @@ resources:
         version: 1.17.9-gke.6300
         autoscaling:
           enabled: true
-          minNodeCount: 1
-          maxNodeCount: 5
-        initialNodeCount: 2
+          minNodeCount: {{ properties["minNodeCount"] }}
+          maxNodeCount: {{ properties["maxNodeCount"] }}
+        initialNodeCount: {{ properties["desiredNodeCount"] }}
         management:
           autoUpgrade: true
           autoRepair: true
@@ -115,7 +115,7 @@ resources:
           workloadMetadataConfig:
             nodeMetadata: SECURE
           {% endif %}
-          machineType: "n1-standard-4"
+          machineType: {{ properties["gkeMachineType"] }}
           diskSizeGb: 20
           oauthScopes: {{ VM_OAUTH_SCOPES }}
           serviceAccount: {{ KF_VM_SA_NAME }}@{{ env['project'] }}.iam.gserviceaccount.com

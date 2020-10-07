@@ -187,6 +187,23 @@ resources:
     runtimePolicy:
       - UPDATE_ALWAYS
 
+{# Enable the resource manager API. This is needed below to get IAM policy.
+ If activating multiple APIs you might want to serialize them.
+
+ We use an action and not the type deploymentmanager.v2.virtual.enableService
+ because we only want to create it; we don't want to delete it.
+ Deleting the service corresponds to deactivating the API and that causes problems.
+ #}
+- name: resource-manager-api
+  action: 'gcp-types/servicemanagement-v1:servicemanagement.services.enable'
+  properties:
+    consumerId: {{ 'project:' + env['project'] }}
+    serviceName: cloudresourcemanager.googleapis.com
+
+{# Enable cloud endpoints. This is used to provision DNS names.
+
+TODO(jlewi): Do we need to serialize API activation
+#}
 - name: endpoints-api
   action: 'gcp-types/servicemanagement-v1:servicemanagement.services.enable'
   properties:

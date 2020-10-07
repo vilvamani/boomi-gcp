@@ -49,10 +49,40 @@ resources:
     displayName: Service Account used for Kubeflow user actions.
 
 - name: {{ KF_VM_SA_NAME }}
-  type: iam.v1.serviceAccount
+  type: gcp-types/iam-v1:projects.serviceAccounts
   properties:
     accountId: {{ KF_VM_SA_NAME }}
-    displayName: GCP Service Account to use as VM Service Account for Kubeflow Cluster VMs
+    displayName: Service Account used for Kubeflow admin actions.
+  accessControl:
+    gcpIamPolicy:
+    bindings:
+    - role: roles/container.admin
+      members:
+      - {{ 'serviceAccount:' + env['project_number'] + '@cloudservices.gserviceaccount.com' }}
+    - role: roles/container.admin
+      members:
+      - {{ 'serviceAccount:' + KF_VM_SA_NAME + '@' + env['project'] + '.iam.gserviceaccount.com' }}
+    - role: roles/servicemanagement.admin
+      members:
+      - {{ 'serviceAccount:' + KF_VM_SA_NAME + '@' + env['project'] + '.iam.gserviceaccount.com' }}
+    - role: roles/container.admin
+      members:
+      - {{ 'serviceAccount:' + KF_VM_SA_NAME + '@' + env['project'] + '.iam.gserviceaccount.com' }}
+    - role: roles/compute.networkAdmin
+      members:
+      - {{ 'serviceAccount:' + KF_VM_SA_NAME + '@' + env['project'] + '.iam.gserviceaccount.com' }}
+    - role: roles/storage.admin
+      members:
+      - {{ 'serviceAccount:' + KF_VM_SA_NAME + '@' + env['project'] + '.iam.gserviceaccount.com' }}
+    - role: roles/dataflow.admin
+      members:
+      - {{ 'serviceAccount:' + KF_VM_SA_NAME + '@' + env['project'] + '.iam.gserviceaccount.com' }}
+    - role: roles/logging.logWriter
+      members:
+      - {{ 'serviceAccount:' + KF_VM_SA_NAME + '@' + env['project'] + '.iam.gserviceaccount.com' }}
+    - role: roles/monitoring.metricWriter
+      members:
+      - {{ 'serviceAccount:' + KF_VM_SA_NAME + '@' + env['project'] + '.iam.gserviceaccount.com' }}
 
 - name: {{ CLUSTER_NAME }}
   {% if properties['gkeApiVersion'] == 'v1beta1' %}
